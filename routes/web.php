@@ -11,6 +11,11 @@
 |
 */
 
+
+Route::group(['prefix' => 'office', 'namespace' => 'Office', 'middleware' => ['auth']], function (){
+    Route::get('/', 'DashboardController@dashboard')->name('office.index');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
