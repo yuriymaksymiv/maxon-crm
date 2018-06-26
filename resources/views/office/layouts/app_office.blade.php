@@ -17,6 +17,7 @@
     <link href="{{ asset('dashboard/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/morrisjs/morris.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('dashboard/style.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Scripts -->
     <script src="{{ asset('dashboard/jquery/jquery.min.js') }}" defer></script>

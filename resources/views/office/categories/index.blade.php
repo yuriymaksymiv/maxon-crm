@@ -15,12 +15,14 @@
                     <div class="panel-body">
                         <table class="table">
                             <thead>
+                                <th></th>
                                 <th>Назва</th>
                                 <th>Дії</th>
                             </thead>
                             <tbody>
                             @forelse ($categories as $category)
                                 <tr>
+                                    <td><img src="{{asset('storage' . '/' . 'user' . '-' . $category->user_id . '/' . 'category' . '/' .$category->image)}}" class="category-image"></td>
                                     <td>{{$category->name}}</td>
                                     <td class="text-right">
                                         <form onsubmit="if(confirm('Видалити')){ return true }else{ return false}"
