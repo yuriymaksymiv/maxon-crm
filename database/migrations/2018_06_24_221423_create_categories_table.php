@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug', 128)->unique();
             $table->integer('parent_id')->nullable();
             $table->tinyInteger('published')->nullable();
-            $table->longText('images')->nullable();
+            $table->longText('image')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');

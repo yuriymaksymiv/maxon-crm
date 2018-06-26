@@ -11,7 +11,7 @@
 </select>
 
 <label for="">Назва</label>
-<input type="text" class="form-control" name="name" placeholder="Назва категорії" value="{{$category->title or ""}}" required>
+<input type="text" class="form-control" name="name" placeholder="Назва категорії" value="{{$category->name or ""}}" required>
 
 <label for="">Slug</label>
 <input type="text" class="form-control" name="slug" placeholder="Автоматична генерація" value="{{$category->slug or ""}}" readonly="">
@@ -20,8 +20,9 @@
 <select class="form-control" name="parent_id">
     <option value="0">-- Головна категорія</option>
     @include('office.categories.partials.categories', ['categories' => $categories])
-
 </select>
+
+<input type="file" name="image">
 
 
 

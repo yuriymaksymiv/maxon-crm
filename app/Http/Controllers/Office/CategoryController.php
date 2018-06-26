@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 class CategoryController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('office.categories.index', [
-            'categories' => Category::paginate(10)
+            'categories' => Category::paginate(30)
         ]);
     }
 
@@ -42,8 +43,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        Category::create($request->all());
+        $this->validate($request, [
+            'name'  => 'required',
+            'image' => 'image|max:20000'
+        ]);
+
+        $category = new Category;
+
+        $category->name = $request->name;
+        $category->published = $request->published;
+        $category->slug = $request->slug;
+        $category->parent_id = $request->parent_id;
+        $category->user_id = $request->user_id;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = $category->user_id . '-' . time() . '-' . $image->getClientOriginalName();
+            $destinationPath = public_path('storage' . '/' . 'user' . '-' . $category->user_id . '/' . 'category');
+            $image->move($destinationPath, $filename);
+            
+            $category->image = $filename;
+        }
+
+        $category->save();
 
         return redirect()->route('office.category.index');
     }
@@ -67,7 +89,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('office.categories.edit', [
+            'category'      => $category,
+            'categories'    => Category::with('children')->where('parent_id', 0)->get(),
+            'delimiter'     => ''
+        ]);
     }
 
     /**
@@ -79,7 +105,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        $this->validate($request, [
+            'name'  => 'required',
+            'image' => 'image|max:20000'
+        ]);
+
+        $category = Category::find($category->id);
+
+        $category->name = $request->name;
+        $category->published = $request->published;
+        $category->parent_id = $request->parent_id;
+        $category->user_id = $request->user_id;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = $category->user_id . '-' . time() . '-' . $image->getClientOriginalName();
+            $destinationPath = public_path('storage' . '/' . 'user' . '-' . $category->user_id . '/' . 'category');
+            $image->move($destinationPath, $filename);
+
+            $category->image = $filename;
+        }
+
+        $category->save();
+
+        return redirect()->route('office.category.index');
     }
 
     /**
@@ -90,6 +140,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('office.category.index');
     }
 }
