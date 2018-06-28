@@ -15,6 +15,7 @@
 Route::group(['prefix' => 'office', 'namespace' => 'Office', 'middleware' => ['auth']], function (){
     Route::get('/', 'DashboardController@dashboard')->name('office.index');
     Route::resource('/category', 'CategoryController', ['as' => 'office']);
+    Route::resource('/product', 'ProductController', ['as' => 'office']);
 });
 
 Route::get('/', function () {

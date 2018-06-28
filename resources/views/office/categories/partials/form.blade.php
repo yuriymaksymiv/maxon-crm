@@ -24,6 +24,4 @@
 
 <input type="file" name="image">
 
-
-
 <input class="btn btn-success" type="submit" value="Зберегти">

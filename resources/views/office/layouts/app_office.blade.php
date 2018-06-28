@@ -276,7 +276,7 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Католог<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Товари</a>
+                                <a href="/office/product">Товари</a>
                             </li>
                             <li>
                                 <a href="/office/category">Категорії товарів</a>
